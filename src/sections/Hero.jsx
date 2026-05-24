@@ -84,12 +84,23 @@ function Hero() {
       {/* Right Image */}
       <div className="flex-1 flex justify-center ">
 
-        <img
-          src={docter}
-          alt="Healthcare"
-          className="  max-w-4xl h-auto z-[1] transform translate-x-15"
-          
-        />
+       <img
+  src={docter}
+  alt="Healthcare"
+  className="
+    w-full
+    max-w-xs
+    sm:max-w-md
+    md:max-w-2xl
+    lg:max-w-4xl
+    h-auto
+    z-[1]
+    mx-auto
+    translate-x-0
+    md:translate-x-10
+    lg:translate-x-15
+  "
+/>
 
       </div>
 
