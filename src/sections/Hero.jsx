@@ -116,7 +116,7 @@ function Hero() {
     h-auto
     z-[1]
     mx-auto
-    scale-135
+    scale-120
     md:scale-110
     translate-x-0
     md:translate-x-10
