@@ -81,53 +81,244 @@ function SkinQuiz() {
     }
   };
 
-  // DETECT SKIN TYPE
-  const getSkinType = () => {
+ // DETECT SKIN TYPE
+const getSkinType = () => {
 
-    const oilyCount =
-      answers.filter(
-        (a) =>
-          a.includes("Oily") ||
-          a.includes("Very Often")
-      ).length;
+  const oilyCount =
+    answers.filter(
+      (a) =>
+        a.includes("Oily") ||
+        a.includes("Very Often")
+    ).length;
 
-    const dryCount =
-      answers.filter(
-        (a) =>
-          a.includes("Dry")
-      ).length;
+  const dryCount =
+    answers.filter(
+      (a) =>
+        a.includes("Dry")
+    ).length;
 
-    if (oilyCount >= 2) {
-      return {
-        type: "Oily Skin",
-        products: [
-          "Salicylic Acid Face Wash",
-          "Oil-Free Moisturizer",
-          "Niacinamide Serum",
-        ],
-      };
-    }
-
-    if (dryCount >= 2) {
-      return {
-        type: "Dry Skin",
-        products: [
-          "Hydrating Cleanser",
-          "Ceramide Moisturizer",
-          "Hyaluronic Acid Serum",
-        ],
-      };
-    }
+  // OILY SKIN
+  if (oilyCount >= 2) {
 
     return {
-      type: "Normal Skin",
-      products: [
-        "Gentle Face Wash",
-        "Vitamin C Serum",
-        "Daily Moisturizer",
-      ],
+
+      type: "Oily Skin",
+
+      routine: {
+
+        morning: [
+
+          {
+            title: "Cleanser",
+            description:
+              "Wash your face with a Salicylic Acid face wash to remove excess oil and dirt.",
+          },
+
+          {
+            title: "Serum",
+            description:
+              "Apply a Niacinamide serum to control oil and reduce acne marks.",
+          },
+
+          {
+            title: "Moisturizer",
+            description:
+              "Use a lightweight oil-free moisturizer for hydration.",
+          },
+
+          {
+            title: "Sunscreen",
+            description:
+              "Apply SPF 50 sunscreen before going outside.",
+          },
+
+        ],
+
+        night: [
+
+          {
+            title: "Face Wash",
+            description:
+              "Clean your skin properly to remove pollution and oil buildup.",
+          },
+
+          {
+            title: "Treatment",
+            description:
+              "Apply acne treatment or salicylic acid serum.",
+          },
+
+          {
+            title: "Moisturizer",
+            description:
+              "Use a gel-based night moisturizer.",
+          },
+
+        ],
+
+        tips: [
+
+          "Drink plenty of water daily.",
+
+          "Avoid touching your face repeatedly.",
+
+          "Do not over-wash your face.",
+
+        ],
+
+      },
+
     };
+
+  }
+
+  // DRY SKIN
+  if (dryCount >= 2) {
+
+    return {
+
+      type: "Dry Skin",
+
+      routine: {
+
+        morning: [
+
+          {
+            title: "Cleanser",
+            description:
+              "Use a gentle hydrating cleanser to clean your face.",
+          },
+
+          {
+            title: "Serum",
+            description:
+              "Apply Hyaluronic Acid serum for deep hydration.",
+          },
+
+          {
+            title: "Moisturizer",
+            description:
+              "Use a Ceramide-based moisturizer to lock moisture.",
+          },
+
+          {
+            title: "Sunscreen",
+            description:
+              "Apply SPF sunscreen to protect dry skin from damage.",
+          },
+
+        ],
+
+        night: [
+
+          {
+            title: "Face Wash",
+            description:
+              "Clean your face using a non-foaming cleanser.",
+          },
+
+          {
+            title: "Hydration",
+            description:
+              "Apply a nourishing hydration serum.",
+          },
+
+          {
+            title: "Night Cream",
+            description:
+              "Use a thick night cream before sleeping.",
+          },
+
+        ],
+
+        tips: [
+
+          "Avoid very hot water on face.",
+
+          "Use moisturizer immediately after washing face.",
+
+          "Drink enough water daily.",
+
+        ],
+
+      },
+
+    };
+
+  }
+
+  // NORMAL SKIN
+  return {
+
+    type: "Normal Skin",
+
+    routine: {
+
+      morning: [
+
+        {
+          title: "Cleanser",
+          description:
+            "Use a gentle daily cleanser.",
+        },
+
+        {
+          title: "Vitamin C",
+          description:
+            "Apply Vitamin C serum for glowing skin.",
+        },
+
+        {
+          title: "Moisturizer",
+          description:
+            "Use a lightweight moisturizer.",
+        },
+
+        {
+          title: "Sunscreen",
+          description:
+            "Apply SPF 30 sunscreen daily.",
+        },
+
+      ],
+
+      night: [
+
+        {
+          title: "Clean Face",
+          description:
+            "Wash face properly before sleeping.",
+        },
+
+        {
+          title: "Hydration",
+          description:
+            "Apply light hydration serum.",
+        },
+
+        {
+          title: "Night Cream",
+          description:
+            "Use a gentle night cream.",
+        },
+
+      ],
+
+      tips: [
+
+        "Maintain a healthy diet.",
+
+        "Sleep at least 7-8 hours.",
+
+        "Stay hydrated.",
+
+      ],
+
+    },
+
   };
+
+};
 
   const result =
     getSkinType();
@@ -196,9 +387,9 @@ function SkinQuiz() {
           <>
 
             {/* Result */}
-         <ResultCard
-        skinType={result.type}
-        products={result.products}
+        <ResultCard
+  skinType={result.type}
+  routine={result.routine}
         onRestart={() => {
       
           setCurrentQuestion(0);
@@ -209,29 +400,7 @@ function SkinQuiz() {
         }}
      />      
 
-            {/* Product Suggestions */}
-            <div className="grid md:grid-cols-3 gap-6">
-
-              {result.products.map(
-                (product, index) => (
-
-                  <div
-                    key={index}
-                    className="bg-blue-50 border border-blue-100 rounded-3xl p-6 text-center hover:shadow-lg transition duration-300"
-                  >
-
-                    <h3 className="text-lg font-semibold text-gray-800">
-
-                      {product}
-
-                    </h3>
-
-                  </div>
-
-                )
-              )}
-
-            </div>
+      
 
             {/* Restart */}
             <button

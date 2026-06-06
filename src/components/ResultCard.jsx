@@ -2,7 +2,7 @@
 
 function ResultCard({
   skinType,
-  products,
+  routine,
   onRestart,
 }) {
 
@@ -27,49 +27,117 @@ function ResultCard({
 
       <p className="text-gray-600 leading-8 max-w-2xl mx-auto mb-12">
 
-        Based on your answers, these skincare
-        products may help improve your skin
-        health and daily skincare routine.
+        Based on your answers, here is your
+        personalized skincare routine for
+        healthy and glowing skin.
 
       </p>
 
-      {/* Product Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {/* Morning Routine */}
+      <div className="bg-orange-50 border border-orange-100 rounded-3xl p-8 mb-8 text-left">
 
-        {products.map((product, index) => (
+        <h3 className="text-2xl font-bold text-gray-900 mb-6">
+          🌞 Morning Routine
+        </h3>
 
-          <div
-            key={index}
-            className="bg-blue-50 border border-blue-100 rounded-3xl p-6 hover:shadow-xl transition duration-300"
-          >
+        <div className="space-y-5">
 
-            <div className="w-16 h-16 mx-auto mb-5 bg-blue-100 rounded-full flex items-center justify-center text-3xl">
+          {routine.morning.map((step, index) => (
 
-              ✨
+            <div
+              key={index}
+              className="bg-white rounded-2xl p-5 shadow-sm"
+            >
+
+              <p className="text-sm text-blue-600 font-semibold mb-2">
+                STEP {index + 1}
+              </p>
+
+              <h4 className="text-lg font-bold text-gray-800 mb-2">
+                {step.title}
+              </h4>
+
+              <p className="text-gray-600 leading-7">
+                {step.description}
+              </p>
 
             </div>
 
-            <h3 className="text-lg font-semibold text-gray-800 leading-7">
+          ))}
 
-              {product}
+        </div>
 
-            </h3>
+      </div>
 
-          </div>
+      {/* Night Routine */}
+      <div className="bg-blue-50 border border-blue-100 rounded-3xl p-8 mb-8 text-left">
 
-        ))}
+        <h3 className="text-2xl font-bold text-gray-900 mb-6">
+          🌙 Night Routine
+        </h3>
+
+        <div className="space-y-5">
+
+          {routine.night.map((step, index) => (
+
+            <div
+              key={index}
+              className="bg-white rounded-2xl p-5 shadow-sm"
+            >
+
+              <p className="text-sm text-blue-600 font-semibold mb-2">
+                STEP {index + 1}
+              </p>
+
+              <h4 className="text-lg font-bold text-gray-800 mb-2">
+                {step.title}
+              </h4>
+
+              <p className="text-gray-600 leading-7">
+                {step.description}
+              </p>
+
+            </div>
+
+          ))}
+
+        </div>
+
+      </div>
+
+      {/* Tips */}
+      <div className="bg-green-50 border border-green-100 rounded-3xl p-8 text-left">
+
+        <h3 className="text-2xl font-bold text-gray-900 mb-5">
+          💡 Extra Tips
+        </h3>
+
+        <ul className="space-y-4">
+
+          {routine.tips.map((tip, index) => (
+
+            <li
+              key={index}
+              className="text-gray-700 leading-7"
+            >
+              • {tip}
+            </li>
+
+          ))}
+
+        </ul>
 
       </div>
 
       {/* Restart Button */}
-      <button
+      {/* <button
         onClick={onRestart}
         className="mt-12 bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 rounded-2xl text-lg font-semibold transition duration-300 shadow-lg"
       >
 
         Retake Quiz
 
-      </button>
+      </button> */}
 
     </div>
   );
